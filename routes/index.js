@@ -1,9 +1,12 @@
-import express from 'express';
-const router = express.Router();
+import express from "express";
+import router from "./router.js"
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+const server = express();
+
+server.get('/', (req, res, next) => {
+  res.send("Estás haciendo una petición GET al servidor en /")
 });
 
-export default router;
+server.use("/api", router)
+
+export default server;
