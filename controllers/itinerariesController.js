@@ -5,7 +5,7 @@ const itinerariesController = {
   getItineraries: async (req, res, next) => {
     let itineraries;
     try {
-      itineraries = await Itinerary.find().populate({path: "city", select: "city country"});
+      itineraries = await Itinerary.find().populate({path: "city", select: "city country -_id"});
       
       res.json({
         success: true,
@@ -19,7 +19,7 @@ const itinerariesController = {
     const { id } = req.params;
     let itinerary;
     try {
-      itinerary = await Itinerary.findById(id).populate({path: "city", select: "city country"});
+      itinerary = await Itinerary.findById(id).populate({path: "city", select: "city country -_id"});
   
       res.json({
         success: true,
@@ -33,7 +33,7 @@ const itinerariesController = {
     const { cityId } = req.params;
     let itineraries;
     try {
-      itineraries = await Itinerary.find({city: cityId}).populate({path: "city", select: "city country"});
+      itineraries = await Itinerary.find({city: cityId}).populate({path: "city", select: "city country -_id"});
       
       res.json({
         success: true,
