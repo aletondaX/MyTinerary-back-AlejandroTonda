@@ -1,6 +1,11 @@
 import express from "express";
 import citiesController from "../controllers/citiesController.js";
 import itinerariesController from "../controllers/itinerariesController.js";
+import authController from "../controllers/authController.js";
+import validator from "../middlewares/validator.js";
+import { signUpSchema } from "../validators/signUpValidator.js";
+import { signInSchema } from "../validators/signInValidator.js";
+import passport from "../middlewares/passport.js";
 
 const router = express.Router();
 
@@ -20,5 +25,9 @@ router.get("/itineraries/city/:cityId", itinerariesController.getItinerariesByCi
 router.post("/itineraries", itinerariesController.createItinerary);
 router.put("/itineraries/:id", itinerariesController.updateItinerary);
 router.delete("/itineraries/:id", itinerariesController.deleteItinerary);
+
+router.post("/auth/signup", validator(signUpSchema), authController.signUp);
+router.post("/auth/login", validator(signInSchema), authController.signIn);
+router.get("/auth/token", passport.authenticate("jwt", {session: false}), authController.loginWithToken);
 
 export default router;
