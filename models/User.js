@@ -6,7 +6,7 @@ let schema = new Schema({
   email: {type: String, required: true},
   password: {type: String, required: true},
   imgUrl: {type: String, default: "/def-user.png"},
-  country: {type: String, required: true},
+  country: {type: String, required: true}
 }, {
   timestamps: false
 });

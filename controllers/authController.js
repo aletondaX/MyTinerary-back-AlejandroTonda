@@ -54,7 +54,7 @@ const authController = {
       }
 
       let { firstName, lastName, email, imgUrl } = userInDB
-      const token = jwt.sign({ email, imgUrl }, process.env.KEY, { expiresIn: "1h" })
+      const token = jwt.sign({ firstName, email, imgUrl }, process.env.KEY, { expiresIn: "1h" })
       return res.status(200).json({
         success: true,
         userData: { firstName, lastName, email, imgUrl },
@@ -68,10 +68,10 @@ const authController = {
   },
   loginWithToken: (req, res) => {
     // console.log(req.user);
-    const { email, imgUrl } = req.user;
+    let { firstName, email, imgUrl } = req.user;
     res.status(200).json({
       success: true,
-      userData: { email, imgUrl },
+      userData: { firstName, email, imgUrl },
       message: "Logged in successfully"
     })
   }
