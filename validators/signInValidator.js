@@ -12,9 +12,11 @@ import joiPwd from "joi-password-complexity";
 export const signInSchema = joi.object({
   email: joi.string().email().required().messages({
     "any.required": "Email is required",
+    "string.empty": "Email is required",
     "string.email": "Email must be a valid email"
   }),
   password: joi.string().messages({
-    "any.required": "Password is required"
+    "any.required": "Password is required",
+    "string.empty": "Password is required",
   })
 })
